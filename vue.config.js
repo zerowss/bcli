@@ -2,11 +2,10 @@
  * @Author: wangss 
  * @Date: 2018-11-08 15:25:14 
  * @Last Modified by: wangss
- * @Last Modified time: 2018-11-09 17:30:25
+ * @Last Modified time: 2018-11-09 19:12:22
  */
 module.exports = {
   lintOnSave: false,
-  assetsDir: "./",
   devServer: {
     port: 8088, // 端口号
     host: "localhost",
