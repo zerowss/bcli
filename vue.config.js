@@ -2,11 +2,11 @@
  * @Author: wangss 
  * @Date: 2018-11-08 15:25:14 
  * @Last Modified by: wangss
- * @Last Modified time: 2018-11-09 14:19:35
+ * @Last Modified time: 2018-11-09 14:35:06
  */
 module.exports = {
   lintOnSave: false,
-  assetsDir: "bcli",
+  outputDir: "bcli",
   devServer: {
     port: 8088, // 端口号
     host: "localhost",
