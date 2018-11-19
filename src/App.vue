@@ -23,16 +23,12 @@ export default {
     this.getMsg();
   },
   methods: {
-    getMsg() {
-      this.axios
-        .get("/api/example/get")
-        .then(response=>{
-          const data = response.data.data.examples;
-          this.msg = data[0]['msg'];
-        })
-        .catch(error=> {
-          console.log(error);
-        });
+    async getMsg() {
+      const res = await this.$http.get("/api/example/get");
+      console.log(res,'res');
+      if(res.data &&res.data.code == 0){
+          this.msg = res.data.data.examples[0]['msg'];
+      }
     }
   }
 };

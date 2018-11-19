@@ -1,62 +1,113 @@
 "use strict";
 
-import Vue from "vue";
 import axios from "axios";
 import qs from "qs";
 console.log(process.env, "环境");
-// Full config:  https://github.com/axios/axios#request-config
-// axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+let cancels = [];
+// 初始化 设置钩子函数
+let _before, _error, _success, _complete;
 
-let config = {
-  // baseURL: process.env.baseURL || process.env.apiUrl || "",
-  // timeout: 60 * 1000 // Timeout
-  // withCredentials: true, // Check cross-site Access-Control
-};
+function handleError(err) {
+  const isCanceled = err && err.message && err.message.canceled;
+  if (isCanceled) return;
+  _error(err);
+}
 
-const _axios = axios.create(config);
-
-_axios.interceptors.request.use(
-  function (config) {
-    // Do something before request is sent
-    return config;
-  },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-  }
-);
-
-// Add a response interceptor
-_axios.interceptors.response.use(
-  function (response) {
-    // Do something with response data
-    return response;
-  },
-  function (error) {
-    // Do something with response error
-    return Promise.reject(error);
-  }
-);
-
-Plugin.install = function (Vue, options) {
-  Vue.axios = _axios;
-  window.axios = _axios;
-  Object.defineProperties(Vue.prototype, {
-    axios: {
-      get() {
-        return _axios;
-      }
+function setOptions(axiosInstance) {
+  axiosInstance.interceptors.request.use(
+    config => {
+      // 在发送请求之前做某事
+      _before();
+      return config;
     },
-    $axios: {
-      get() {
-        return _axios;
-      }
+    error => {
+      // 请求错误时做些事
+      // _error(error)
+      _complete();
+      return Promise.reject(error);
     }
-  });
+  );
+
+  axiosInstance.interceptors.response.use(
+    response => {
+      _success(response);
+      _complete();
+      return response;
+    },
+    error => {
+      _complete();
+      handleError(error);
+      return Promise.reject(error);
+    }
+  );
+}
+
+let fetch = (options = {}) => {
+  const { globalHandle = true, isTransformRequest = true } = options;
+  const CancelToken = axios.CancelToken;
+  const config = {
+    cancelToken: new CancelToken(c => {
+      // 一个执行器函数接收一个取消函数作为参数
+      cancels.push(c);
+    })
+  };
+  if (isTransformRequest) {
+    config.transformRequest = [
+      data => {
+        // 这里可以在发送请求之前对请求数据做处理，比如form-data格式化等，这里可以使用开头引入的Qs（这个模块在安装axios的时候就已经安装了，不需要另外安装）
+        data = qs.stringify(data);
+        return data;
+      }
+    ];
+  }
+  const _axios = axios.create(config);
+  _axios.defaults.headers.get["Cache-Control"] = "no-cache";
+  _axios.defaults.headers.get["Pragma"] = "no-cache";
+  _axios.defaults.headers.common["Accept"] = "";
+  _axios.defaults.headers.get["Content-Type"] =
+    "application/x-www-form-urlencoded charset=utf-8";
+  if (globalHandle) {
+    setOptions(_axios);
+  }
+  return _axios;
 };
 
-Vue.use(Plugin);
-
-export default Plugin;
+export default {
+  init(options) {
+    const defaultOptions = {
+      before() {},
+      error() {},
+      success() {},
+      complete() {}
+    };
+    options = Object.assign({}, defaultOptions, options);
+    _before = options.before;
+    _error = options.error;
+    _success = options.success;
+    _complete = options.complete;
+  },
+  get(url, params, options) {
+    return fetch(options).get(url, {
+      params: params
+    });
+  },
+  post(url, params, options) {
+    return fetch(options).post(url, {
+      params: params
+    });
+  },
+  storageSet(key, data) {
+    const dataStr = JSON.stringify(data);
+    localStorage.setItem(key, dataStr);
+  },
+  storageGet(key) {
+    if (!localStorage.getItem(key)) {
+      return "";
+    }
+    const data = JSON.parse(localStorage.getItem(key));
+    return data;
+  },
+  storageRemove(key) {
+    localStorage.removeItem(key);
+  }
+};
