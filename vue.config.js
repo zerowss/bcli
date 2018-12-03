@@ -2,7 +2,7 @@
  * @Author: wangss 
  * @Date: 2018-11-08 15:25:14 
  * @Last Modified by: wangss
- * @Last Modified time: 2018-11-09 19:12:22
+ * @Last Modified time: 2018-11-27 17:28:59
  */
 module.exports = {
   lintOnSave: false,

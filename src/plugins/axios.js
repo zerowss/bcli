@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import qs from "qs";
+import Cookies from "js-cookie";
 console.log(process.env, "环境");
 let cancels = [];
 // 初始化 设置钩子函数
@@ -45,27 +46,29 @@ function setOptions(axiosInstance) {
 let fetch = (options = {}) => {
   const { globalHandle = true, isTransformRequest = true } = options;
   const CancelToken = axios.CancelToken;
+  const token = Cookies.get("token");
   const config = {
     cancelToken: new CancelToken(c => {
       // 一个执行器函数接收一个取消函数作为参数
       cancels.push(c);
-    })
+    }),
+    method: options.method
   };
   if (isTransformRequest) {
     config.transformRequest = [
       data => {
-        // 这里可以在发送请求之前对请求数据做处理，比如form-data格式化等，这里可以使用开头引入的Qs（这个模块在安装axios的时候就已经安装了，不需要另外安装）
         data = qs.stringify(data);
         return data;
       }
     ];
   }
+  if (options.method == "post") {
+    config.headers = {
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+    };
+  }
   const _axios = axios.create(config);
-  _axios.defaults.headers.get["Cache-Control"] = "no-cache";
-  _axios.defaults.headers.get["Pragma"] = "no-cache";
-  _axios.defaults.headers.common["Accept"] = "";
-  _axios.defaults.headers.get["Content-Type"] =
-    "application/x-www-form-urlencoded charset=utf-8";
+  _axios.defaults.headers.common["Authorization"] = "Bearer " + token;
   if (globalHandle) {
     setOptions(_axios);
   }
@@ -92,22 +95,10 @@ export default {
     });
   },
   post(url, params, options) {
-    return fetch(options).post(url, {
-      params: params
-    });
-  },
-  storageSet(key, data) {
-    const dataStr = JSON.stringify(data);
-    localStorage.setItem(key, dataStr);
-  },
-  storageGet(key) {
-    if (!localStorage.getItem(key)) {
-      return "";
-    }
-    const data = JSON.parse(localStorage.getItem(key));
-    return data;
-  },
-  storageRemove(key) {
-    localStorage.removeItem(key);
+    const opt = {
+      options: options || {},
+      method: "post"
+    };
+    return fetch(opt).post(url, params);
   }
 };

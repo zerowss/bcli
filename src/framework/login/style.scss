@@ -1,0 +1,47 @@
+.login{
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    .login-icon{
+        display: flex;
+        align-items: center;
+        height: 82px;
+        img{
+            display: block;
+            width: 50px;
+            height: 40px;
+        }
+    }
+    .login-content{
+        width: 100%;
+        height: 400px;
+        background: url("../../assets/bg.jpg") no-repeat left top;
+        background-size: cover;
+        padding-top: 50px;
+        box-sizing: border-box;
+        .login-wrap{
+            width: 400px;
+            height: 300px;
+            margin: 0 auto;
+            padding-top: 10px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 1px 1px 1px #000;
+            box-sizing: border-box;
+            .el-tabs__header{
+                width: 100px;
+                margin: 10px auto;
+            }
+            .el-tabs__active-ba{
+                background-color:#ffffff;
+            }
+            .el-tabs__nav-wrap::after{
+                background-color:#ffffff;
+            }
+        }
+        .demo-ruleForm{
+            padding: 20px 20px 0;
+            box-sizing: border-box;
+        }
+    }
+}
