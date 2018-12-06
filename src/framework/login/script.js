@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 import { local } from "../../common/units/storage";
-console.log(local);
 export default {
   data() {
     const validatePass = (rule, value, callback) => {
@@ -96,14 +95,12 @@ export default {
       const res = await this.$http.post("/api/login", params);
       console.log(res);
       if (res.data && res.data.code === 0) {
-        local.setItem("userInfo", JSON.stringify(res.data.data));
+        local.setItem("userInfo", res.data.data);
         Cookies.set("token", res.data.token);
         Cookies.set("token-exp", new Date().getTime());
         Cookies.set("userName", res.data.data.username);
         this.$message.success("登录成功");
         this.$router.push("/");
-      } else {
-        this.$message.error(res.data.desc);
       }
     },
     // 注册
@@ -114,8 +111,6 @@ export default {
       if (res.data && res.data.code === 0) {
         this.$message.success("注册成功");
         this.activeName = "login";
-      } else {
-        this.$message.error(res.data.desc);
       }
     },
     submintRegisterForm(formName) {

@@ -1,24 +1,19 @@
-import HelloWorld from "@/components/HelloWorld.vue";
+import { local } from "../../common/units/storage";
 
 export default {
-  components: {
-    HelloWorld
-  },
+  components: {},
   data() {
     return {
-      msg: "hello"
+      userName: ""
     };
   },
   created() {
-    this.getMsg();
+    this.getUserInfo();
   },
   methods: {
-    async getMsg() {
-      const res = await this.$http.get("/api/example/get");
-      console.log(res, "res");
-      if (res.data && res.data.code == 0) {
-        this.msg = res.data.data.examples[0]["msg"];
-      }
+    getUserInfo() {
+      const userInfo = local.getItem("userInfo");
+      this.userName = userInfo.username;
     }
   }
 };

@@ -54,8 +54,3 @@ export const session = {
     keys.forEach(key => this.removeItem(key));
   }
 };
-
-// export default {
-//   local,
-//   session
-// };
