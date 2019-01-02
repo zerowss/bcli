@@ -5,7 +5,7 @@ import router from "./router";
 import store from "./store";
 import "./plugins/element.js";
 import "./main.scss";
-
+import "./icons/index";
 Vue.prototype.$http = request;
 Vue.config.productionTip = false;
 

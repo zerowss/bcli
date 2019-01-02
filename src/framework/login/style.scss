@@ -1,47 +1,100 @@
-.login{
-    width: 100%;
-    height: 100%;
-    background-color: #ffffff;
-    .login-icon{
+.user-login {
+    .user-login-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-size: cover;
+        background: url('../../assets/bg.png') no-repeat left top;
+    }
+    .content-wrapper {
+        position: absolute;
+        top: -100px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        max-width: 1080px;
+        margin: 0 auto;
         display: flex;
+        justify-content: space-around;
         align-items: center;
-        height: 82px;
-        img{
-            display: block;
-            width: 50px;
-            height: 40px;
+        .slogan {
+            text-align: center;
+            color: #666666;
+            font-size: 36px;
+            letter-spacing: 2px;
+            line-height: 48px;
         }
     }
-    .login-content{
-        width: 100%;
-        height: 400px;
-        background: url("../../assets/bg.jpg") no-repeat left top;
-        background-size: cover;
-        padding-top: 50px;
-        box-sizing: border-box;
-        .login-wrap{
-            width: 400px;
-            height: 300px;
-            margin: 0 auto;
-            padding-top: 10px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 1px 1px 1px #000;
-            box-sizing: border-box;
-            .el-tabs__header{
-                width: 100px;
-                margin: 10px auto;
-            }
-            .el-tabs__active-ba{
-                background-color:#ffffff;
-            }
-            .el-tabs__nav-wrap::after{
-                background-color:#ffffff;
+
+    .form-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 30px 40px;
+        background-color: #fff;
+        border-radius: 6px;
+        box-shadow: 1px 1px 2px #eee;
+    }
+
+    .link {
+        color: #999;
+        text-decoration: none;
+        font-size: 13px;
+        a{
+           color: #3080fe;
+           font-weight: 700;
+        }
+    }
+
+    .line {
+        color: #dcd6d6;
+        margin: 0 8px;
+    }
+
+    .oauth-box {
+        margin-top: 10px;
+        color: #8b9196;
+        font-size: 13px;
+
+        .oauth {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-top: 15px;
+
+            .oauth-bg {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                background-color: #f4f8fb;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .wechat-icon {
+                    font-size: 22px;
+                    cursor: pointer;
+                }
             }
         }
-        .demo-ruleForm{
-            padding: 20px 20px 0;
-            box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .user-login {
+        .content-wrapper {
+            margin: 20px auto;
+            top: 40px;
+            max-width: 300px;
+            display: block;
+
+            .slogan {
+                color: #666;
+                font-size: 22px;
+                line-height: 30px;
+            }
         }
     }
 }

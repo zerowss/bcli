@@ -1,0 +1,53 @@
+.register-form{
+    .form-line {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+            border-width: 1px;
+            border-style: solid;
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+            border-color: #dcdcdc;
+            border-radius: 0;
+        }
+    }
+
+    .form-Item {
+        position: relative;
+        flex-direction: column;
+    }
+
+    .form-title {
+        margin: 0 0 20px;
+        text-align: center;
+        color: #3080fe;
+        letter-spacing: 12px;
+    }
+
+    .input-icon {
+        color: #999;
+    }
+
+    .checkbox {
+        margin-left: 5px;
+    }
+
+    .submit-btn {
+        margin-bottom: 25px;
+        width: 100%;
+        background: #3080fe;
+        border-radius: 28px;
+    }
+    .normall-icon {
+        color: #999;
+    }
+}
