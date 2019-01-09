@@ -16,7 +16,7 @@ export default {
       this.activity = num;
     },
     weChatLogin() {
-      this.$http.get("/api//wechat/redirect", {});
+      this.$http.get("/api/wechat/redirect", {});
     }
   }
 };
