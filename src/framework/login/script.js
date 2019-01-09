@@ -13,9 +13,10 @@ export default {
   methods: {
     // 注册
     resetClick(num) {
-      console.log("ss", typeof num);
-      console.log("ss", num);
       this.activity = num;
+    },
+    weChatLogin() {
+      this.$http.get("/api//wechat/redirect", {});
     }
   }
 };

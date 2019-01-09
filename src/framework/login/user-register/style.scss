@@ -1,9 +1,10 @@
 .register-form{
     .form-line {
+        width: 254px;
         position: relative;
         display: flex;
         align-items: center;
-
+        box-sizing: border-box;
         &:after {
             content: '';
             position: absolute;

@@ -12,7 +12,7 @@ export default {
         username: [
           {
             required: true,
-            message: "会员名/邮箱/手机号不能为空"
+            message: "昵称/邮箱不能为空"
           }
         ],
         password: [
@@ -34,14 +34,6 @@ export default {
           return false;
         }
       });
-    },
-    resetForm(formName) {
-      this.ruleForm = {
-        username: "",
-        password: "",
-        checkPass: ""
-      };
-      this.$refs[formName].resetFields();
     },
     async login() {
       const params = this.ruleForm;
