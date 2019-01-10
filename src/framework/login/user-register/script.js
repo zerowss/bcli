@@ -97,13 +97,14 @@ export default {
       isShowCode: false,
       isCanCode: false,
       emailTip: "获取验证码",
-      countDown: 10,
+      countDown: 60,
       isSameName: false
     };
   },
   props: {
     changeTab: {
-      type: Function
+      type: Function,
+      default: () => {}
     }
   },
   methods: {
@@ -114,6 +115,7 @@ export default {
       console.log(res, "ppos");
       if (res.data && res.data.code === 0) {
         this.$message.success("注册成功");
+        console.log("ss", this.changeTab);
         this.changeTab(1);
       }
     },
@@ -127,7 +129,7 @@ export default {
       });
     },
     changEmail(value) {
-      if (value) {
+      if (value && isEmail(value)) {
         this.isShowCode = true;
       } else {
         this.isShowCode = false;
@@ -142,7 +144,7 @@ export default {
           clearInterval(timer);
           this.emailTip = "获取验证码";
           this.isCanCode = false;
-          this.countDown = 10;
+          this.countDown = 60;
         }
       }, 1000);
       this.getCode();

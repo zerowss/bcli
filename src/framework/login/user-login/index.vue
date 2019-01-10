@@ -23,13 +23,13 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row class=form-item>
+                <!-- <el-row class=form-item>
                     <el-col>
                         <el-form-item>
                             <el-checkbox class="checkbox">记住账号</el-checkbox>
                         </el-form-item>
                     </el-col>
-                </el-row>
+                </el-row> -->
                 <el-row class="form-item">
                     <el-button type="primary" class="submit-btn" size="small" @click="submintForm('form')">登 录</el-button>
                 </el-row>

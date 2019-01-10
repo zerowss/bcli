@@ -7,7 +7,7 @@
             </h2>
             <div class="form-container">
                 <userLogin v-if="activity === 1"></userLogin> 
-                <userRegister v-else-if="activity === 2" :changTab="resetClick"></userRegister>
+                <userRegister v-else-if="activity === 2" :changeTab="resetClick"></userRegister>
                 <el-row class="tips">
                     <span class="link" v-if="activity === 1">没有账号？<a href="javascript:;"  @click="resetClick(2)">立即注册</a></span>
                     <span class="link" v-else-if="activity === 2"><a href="javascript:;"  @click="resetClick(1)">已有账号登录</a></span>
