@@ -10,13 +10,17 @@ export default {
       activity: 1
     };
   },
+  mounted() {},
   methods: {
     // 注册
     resetClick(num) {
       this.activity = num;
     },
-    weChatLogin() {
-      this.$http.get("/api/wechat/redirect", {});
+    async weChatLogin() {
+      const res = await this.$http.get("/api/wechat/redirect", {});
+      if (res.data && res.data.code == 0) {
+        window.location.href = res.data.url;
+      }
     }
   }
 };
