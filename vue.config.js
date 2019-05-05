@@ -2,7 +2,7 @@
  * @Author: wangss 
  * @Date: 2018-11-08 15:25:14 
  * @Last Modified by: wangss
- * @Last Modified time: 2018-12-25 14:42:34
+ * @Last Modified time: 2019-03-18 17:27:58
  */
 const path = require("path");
 const resolve = dir => {
@@ -11,9 +11,15 @@ const resolve = dir => {
 
 module.exports = {
   chainWebpack: config => {
-    config.module.rules.delete("svg");
+    // config.module.rules.delete("svg");
     // const svgRule = config.module.rule("svg");
     // svgRule.uses.clear();
+    // 解决node_modules里的svg会一直报错
+    config.module
+      .rule("svg")
+      .exclude.add(resolve("src/icons/svg"))
+      .end();
+
     config.module
       .rule("svg-sprite-loader")
       .test(/\.svg$/)

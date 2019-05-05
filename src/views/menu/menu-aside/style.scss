@@ -1,0 +1,17 @@
+.menu-aside{
+    .el-submenu {
+       .el-submenu__title {
+           span {
+               color: #ffffff;
+           }
+       }
+       &.menu-aside-active {
+           .el-submenu__title {
+               span {
+                   color: #ffd04b;
+               }
+           }
+       }
+    }
+}
+

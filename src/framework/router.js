@@ -1,4 +1,5 @@
-const login = r => require.ensure([], () => r(require("./login")), "login");
+// const login = r => require.ensure([], () => r(require("./login")), "login");
+const login = resolve => require(["./login"], resolve);
 
 export default [
   {

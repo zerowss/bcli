@@ -5,9 +5,27 @@ import router from "./router";
 import store from "./store";
 import "./plugins/element.js";
 import "./main.scss";
-import "./icons/index";
+// 引入fontAwesome库
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import {
+  FontAwesomeIcon,
+  FontAwesomeLayers,
+  FontAwesomeLayersText
+} from "@fortawesome/vue-fontawesome";
+
+import "./components/index"; //加载全局注册组件
+import "./icons/index"; //单独注册svg全局组件 因为其需要引入svg文件
 Vue.prototype.$http = request;
 Vue.config.productionTip = false;
+Vue.prototype.$bus = new Vue();
+
+library.add(fas, fab, far);
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.component("font-awesome-layers", FontAwesomeLayers);
+Vue.component("font-awesome-layers-text", FontAwesomeLayersText);
 
 const vm = new Vue({
   router,

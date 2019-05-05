@@ -1,5 +1,5 @@
 import Vue from "vue";
-import svgIcons from "../components/svgIcons";
+import svgIcons from "./svgIcons";
 Vue.component("svg-icon", svgIcons);
 // requires and returns all modules that match
 const requireAll = requireContext => requireContext.keys().map(requireContext);

@@ -1,19 +1,10 @@
-import { local } from "../../common/units/storage";
-
 export default {
-  components: {},
+  name: "home",
   data() {
     return {
-      userName: ""
+      message: "hello"
     };
   },
-  created() {
-    this.getUserInfo();
-  },
-  methods: {
-    getUserInfo() {
-      const userInfo = local.getItem("userInfo");
-      this.userName = userInfo.username;
-    }
-  }
+  props: {},
+  methods: {}
 };

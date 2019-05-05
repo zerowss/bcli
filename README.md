@@ -1,26 +1,20 @@
 # blgcli
 
-## Project setup
-```
-npm install
-```
+---
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 项目记录
 
-### Compiles and minifies for production
-```
-npm run build
-```
+> 项目文档功能记录
 
-### Run your tests
-```
-npm run test
-```
+- **dist**  项目打包后线上部署文件
+- **public** 存放静态页面，一些单独引用可以放在此处例如 cdn/百度地图api之类的
+- **src** 开发用目录
+  - **assets** 存放静态资源例如图片，一些图标因为用的svg格式 做了处理 我单独拿出来了 未放在这个文件夹下
+  
+  - **common** 存放公共方法、样式
 
-### Lints and fixes files
-```
-npm run lint
+  - **components** 存放全局注册组件
+
+```javascript
+    // 创建index.js 引入此文件夹下.vue文件 进行注册
 ```
